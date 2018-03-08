@@ -3,7 +3,9 @@
   <ModulePrefs title="TestGadget Title" /> 
   <Content type="html">
      <![CDATA[ 
+       <div id="TestGadgetId">
        Hello, world!
+       </div>
      ]]>
   </Content> 
 </Module>
