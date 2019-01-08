@@ -12,7 +12,7 @@ class SourceMeta {
     this.sourceOriginPathFolderName = sourceOriginPathFolderName;
     this.version = version;
 
-    this.sourceOriginPathFolderVersionName = this.sourceOriginPathFolderName + this.version;
+    this.sourceOriginPathFolderVersionName = this.sourceOriginPathFolderName + "@" + this.version;
   }
 
   /** @return {string} sourceOriginPathFolderVersionName + slashPathFileName. */
@@ -41,7 +41,7 @@ class SourceMeta {
 const sourceMeta = new SourceMeta(
   "https://colorfulcakechen.github.io/ChessConnectFour",
   "https://cdn.jsdelivr.net/gh/ColorfulCakeChen/ChessConnectFour",
-  "0.7"
+  "0.8"
 );
 
 /**
