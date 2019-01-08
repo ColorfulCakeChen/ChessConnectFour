@@ -14,7 +14,7 @@ class SourceMeta {
   }
 
   get pathFolderVersionName() {
-    retutn this.pathFolderName + "@" + this.version;
+    return this.pathFolderName + "@" + this.version;
   }
 
   get originPathFolderVersionName() {
