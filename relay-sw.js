@@ -34,14 +34,14 @@ class SourceMeta {
 
   /** @return {string} Replace clientOriginPathFileName by sourceOriginPathFolderVersionName. */
   replaceClientBySource(pathFileName) {
-    return pathFileName.href.replace(this.clientOriginPathFolderName, this.sourceOriginPathFolderVersionName);
+    return pathFileName.replace(this.clientOriginPathFolderName, this.sourceOriginPathFolderVersionName);
   }
 }
 
 const sourceMeta = new SourceMeta(
   "https://colorfulcakechen.github.io/ChessConnectFour",
   "https://cdn.jsdelivr.net/gh/ColorfulCakeChen/ChessConnectFour",
-  "0.10"
+  "0.11"
 );
 
 /**
