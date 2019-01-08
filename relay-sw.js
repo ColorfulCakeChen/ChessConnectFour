@@ -26,6 +26,15 @@ function produceSourceFileList(sourceMeta, fileNames) {
   return result;
 }
 
+/**
+ *
+ * @return Array The URL list.
+ */
+function urlManipulator({url}) {
+  let result = [url];  // ...unfinished..
+  return result;
+}
+
 let precacheFileNames = produceSourceFileList(sourceMeta, [
   "/index.html"
 ]);
@@ -33,10 +42,6 @@ let precacheFileNames = produceSourceFileList(sourceMeta, [
 workbox.precaching.precacheAndRoute(
   precacheFileNames,
   {
-    urlManipulation: ({url}) => {
-      ...
-      return [alteredUrlOption1, alteredUrlOption2, ...];
-    }
+    urlManipulation: urlManipulator
   }
 );
-              
