@@ -50,7 +50,7 @@ const sourceMeta = new SourceMeta(
  * @return Array The URL list.
  */
 function urlManipulator({url}) {
-  let result = [url];  // ...unfinished..
+  let result = [new URL(sourceMeta.prepend(url))];
   return result;
 }
 
