@@ -7,42 +7,43 @@ if (workbox) {
 }
 
 class SourceMeta {
-  constructor(origin, pathFolderName, version) {
-    this.origin = origin;
-    this.pathFolderName = pathFolderName;
+  constructor(clientOriginPathFolderName, sourceOriginPathFolderName, version) {
+    this.clientOriginPathFolderName = clientOriginPathFolderName;
+    this.sourceOriginPathFolderName = sourceOriginPathFolderName;
     this.version = version;
   }
 
-  get pathFolderVersionName() {
-    return this.pathFolderName + "@" + this.version;
+  get sourceOriginPathFolderVersionName() {
+    return this.sourceOriginPathFolderName + this.pathFolderVersionName;
   }
 
-  get originPathFolderVersionName() {
-    return this.origin + this.pathFolderVersionName;
-  }
-
-  /** @return string Origin + pathFolderVersionName + slashPathFileName. */
+  /** @return {string} sourceOriginPathFolderVersionName + slashPathFileName. */
   prepend(slashPathFileName) {
-    return this.originPathFolderVersionName + slashPathFileName;
+    return this.sourceOriginPathFolderVersionName + slashPathFileName;
   }
 
-  /** @return Array The file names prefixed with prepend(). */
+  /** @return {Array} The file names prefixed with prepend(). */
   prependList(slashPathFileNames) {
     let result = new Array(slashPathFileNames.length);
-    let originPathFolderVersionName = this.originPathFolderVersionName;
+    let sourceOriginPathFolderVersionName = this.sourceOriginPathFolderVersionName;
     let i = 0;
     for (let slashPathFileName of slashPathFileNames) {
-      result[i] = originPathFolderVersionName + slashPathFileName;
+      result[i] = sourceOriginPathFolderVersionName + slashPathFileName;
       ++i;
     }
     return result;
   }
+
+  /** @return {string} Replace clientOriginPathFileName by sourceOriginPathFolderVersionName. */
+  replaceClientBySource(pathFileName) {
+    return pathFileName.replace(clientOriginPathFileName, sourceOriginPathFolderVersionName);
+  }
 }
 
 const sourceMeta = new SourceMeta(
-  "https://cdn.jsdelivr.net",
-  "/gh/ColorfulCakeChen/ChessConnectFour",
-  "0.5"
+  "https://colorfulcakechen.github.io/ChessConnectFour",
+  "https://cdn.jsdelivr.net/gh/ColorfulCakeChen/ChessConnectFour",
+  "0.6"
 );
 
 /**
@@ -50,7 +51,8 @@ const sourceMeta = new SourceMeta(
  * @return Array The URL list.
  */
 function urlManipulator({url}) {
-  let newURL = new URL(sourceMeta.prepend(url));
+  let newURLString = sourceMeta.replaceClientBySource(url);
+  let newURL = new URL(newURLString);
   let result = [newURL];
   console.log(`Convert "${url}" to "${newURL.href}"`);
   return result;
