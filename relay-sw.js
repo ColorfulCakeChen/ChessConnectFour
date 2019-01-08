@@ -42,7 +42,7 @@ class SourceMeta {
 const sourceMeta = new SourceMeta(
   "https://cdn.jsdelivr.net",
   "/gh/ColorfulCakeChen/ChessConnectFour",
-  "0.3"
+  "0.4"
 );
 
 /**
