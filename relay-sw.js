@@ -6,25 +6,44 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
-const sourceMeta = {
-  origin:         "https://cdn.jsdelivr.net",
-  pathFolderName: "/gh/ColorfulCakeChen/ChessConnectFour",
-  version:        "0.1"
-};
-
-/**
- *
- * @return Array The file names prefixed with sourceMeta.
- */
-function produceSourceFileList(sourceMeta, fileNames) {
-  let result = new Array(fileNames.length);
-  let i = 0;
-  for (let fileName of fileNames) {
-    result[i] = sourceMeta.origin + sourceMeta.pathFolderName + "@" + sourceMeta.version + fileName;
-    ++i;
+class SourceMeta {
+  constructor(origin, pathFolderName, version) {
+    this.origin = origin;
+    this.pathFolderName = pathFolderName;
+    this.version = version;
   }
-  return result;
+
+  get pathFolderVersionName() {
+    retutn this.pathFolderName + "@" + this.version;
+  }
+
+  get originPathFolderVersionName() {
+    return this.origin + this.pathFolderVersionName;
+  }
+
+  /** @return string Origin + pathFolderVersionName + slashPathFileName. */
+  prepend(slashPathFileName) {
+    return this.originPathFolderVersionName + slashPathFileName;
+  }
+
+  /** @return Array The file names prefixed with prepend(). */
+  prependList(slashPathFileNames) {
+    let result = new Array(slashPathFileNames.length);
+    let originPathFolderVersionName = this.originPathFolderVersionName;
+    let i = 0;
+    for (let slashPathFileName of slashPathFileNames) {
+      result[i] = originPathFolderVersionName + slashPathFileName;
+      ++i;
+    }
+    return result;
+  }
 }
+
+const sourceMeta = new SourceMeta(
+  "https://cdn.jsdelivr.net",
+  "/gh/ColorfulCakeChen/ChessConnectFour",
+  "0.1"
+);
 
 /**
  *
@@ -35,7 +54,10 @@ function urlManipulator({url}) {
   return result;
 }
 
-let precacheFileNames = produceSourceFileList(sourceMeta, [
+//workbox.core.setCacheNameDetails({
+//});
+
+let precacheFileNames = sourceMeta.prependList([
   "/index.html"
 ]);
 
