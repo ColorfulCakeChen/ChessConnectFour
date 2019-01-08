@@ -59,7 +59,7 @@ function urlManipulator({url}) {
 
 let precacheFileNames = sourceMeta.prependList([
   "/index.html",
-  "_config.yml",
+  "/_config.yml",
 ]);
 
 workbox.precaching.precacheAndRoute(
