@@ -34,14 +34,14 @@ class SourceMeta {
 
   /** @return {string} Replace clientOriginPathFileName by sourceOriginPathFolderVersionName. */
   replaceClientBySource(pathFileName) {
-    return pathFileName.replace(this.clientOriginPathFolderName, this.sourceOriginPathFolderVersionName);
+    return pathFileName.href.replace(this.clientOriginPathFolderName, this.sourceOriginPathFolderVersionName);
   }
 }
 
 const sourceMeta = new SourceMeta(
   "https://colorfulcakechen.github.io/ChessConnectFour",
   "https://cdn.jsdelivr.net/gh/ColorfulCakeChen/ChessConnectFour",
-  "0.9"
+  "0.10"
 );
 
 /**
@@ -49,7 +49,7 @@ const sourceMeta = new SourceMeta(
  * @return Array The URL list.
  */
 function urlManipulator({url}) {
-  let newURLString = sourceMeta.replaceClientBySource(url);
+  let newURLString = sourceMeta.replaceClientBySource(url.href);
   let newURL = new URL(newURLString);
   let result = [newURL];
   console.log(`Convert "${url}" to "${newURL.href}"`);
