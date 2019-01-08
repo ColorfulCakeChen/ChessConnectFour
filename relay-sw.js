@@ -41,7 +41,7 @@ class SourceMeta {
 const sourceMeta = new SourceMeta(
   "https://colorfulcakechen.github.io/ChessConnectFour",
   "https://cdn.jsdelivr.net/gh/ColorfulCakeChen/ChessConnectFour",
-  "0.11"
+  "0.12"
 );
 
 /**
@@ -61,6 +61,7 @@ function urlManipulator({url}) {
 
 let precacheFileNames = sourceMeta.prependList([
   "/index.html",
+  "/relay-sw.js",  // !!
   "/_config.yml",
   "/_includes/nested.html",
 ]);
