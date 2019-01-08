@@ -42,7 +42,7 @@ class SourceMeta {
 const sourceMeta = new SourceMeta(
   "https://cdn.jsdelivr.net",
   "/gh/ColorfulCakeChen/ChessConnectFour",
-  "0.4"
+  "0.5"
 );
 
 /**
@@ -50,7 +50,9 @@ const sourceMeta = new SourceMeta(
  * @return Array The URL list.
  */
 function urlManipulator({url}) {
-  let result = [new URL(sourceMeta.prepend(url))];
+  let newURL = new URL(sourceMeta.prepend(url));
+  let result = [newURL];
+  console.log(`Convert "${url}" to "${newURL.href}"`);
   return result;
 }
 
