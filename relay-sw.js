@@ -41,7 +41,7 @@ class SourceMeta {
 const sourceMeta = new SourceMeta(
   "https://colorfulcakechen.github.io/ChessConnectFour",
   "https://cdn.jsdelivr.net/gh/ColorfulCakeChen/ChessConnectFour",
-  "0.14"
+  "0.15"
 );
 
 /**
@@ -56,13 +56,13 @@ function urlManipulator({url}) {
   return result;
 }
 
-workbox.core.setCacheNameDetails({
-//  prefix: "ConnectChessFour",
-  suffix: sourceMeta.version
-//  precache: ,
-//  runtime: ,
-//  googleAnalytics:
-});
+// workbox.core.setCacheNameDetails({
+// //  prefix: "ConnectChessFour",
+//   suffix: sourceMeta.version
+// //  precache: ,
+// //  runtime: ,
+// //  googleAnalytics:
+// });
 
 let precacheFileNames = sourceMeta.prependList([
   "/index.html",
