@@ -41,7 +41,7 @@ class SourceMeta {
 const sourceMeta = new SourceMeta(
   "https://colorfulcakechen.github.io/ChessConnectFour",
   "https://cdn.jsdelivr.net/gh/ColorfulCakeChen/ChessConnectFour",
-  "0.13"
+  "0.14"
 );
 
 /**
@@ -57,7 +57,7 @@ function urlManipulator({url}) {
 }
 
 workbox.core.setCacheNameDetails({
-  prefix: "ConnectChessFour",
+//  prefix: "ConnectChessFour",
   suffix: sourceMeta.version
 //  precache: ,
 //  runtime: ,
