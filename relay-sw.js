@@ -41,7 +41,7 @@ class SourceMeta {
 const sourceMeta = new SourceMeta(
   "https://colorfulcakechen.github.io/ChessConnectFour",
   "https://cdn.jsdelivr.net/gh/ColorfulCakeChen/ChessConnectFour",
-  "0.15.1"
+  "0.16"
 );
 
 /**
@@ -71,9 +71,22 @@ let precacheFileNames = sourceMeta.prependList([
   "/_includes/nested.html",
 ]);
 
-workbox.precaching.precacheAndRoute(
-  precacheFileNames,
-  {
-    urlManipulation: urlManipulator
-  }
+//workbox.precaching.precacheAndRoute(
+//   precacheFileNames,
+//   {
+//     urlManipulation: urlManipulator
+//   }
+// );
+
+workbox.precaching.precache(precacheFileNames);
+
+let routePattern = '${sourceMeta.clientOriginPathFolderName}.*';
+workbox.routing.registerRoute(
+  new RegExp(routePattern),
+  workbox.strategies.cacheFirst({
+    plugins: [
+//      new workbox.broadcastUpdate.Plugin('api-updates')
+    ]
+  })
 );
+
