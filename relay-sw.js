@@ -66,11 +66,12 @@ class JsDelivrPlugin {
       return response;   // Not .html file, no need to convert.
  
     let contentTypeOld = response.headers.get("Content-Type");
-    if (contentTypeOld == "text/html")
+    if (!contentTypeOld.match("text/plain"))
        return response;  // Already correct MIME type, no need to convert.
 
+    let contentTypeNew = contentTypeOld.replace("text/plain", "text/html");
     let newHeaders = new Headers(response.headers);
-    newHeaders.set("Content-Type", "text/html");
+    newHeaders.set("Content-Type", contentTypeNew);
     let newInit = { status : response.status, statusText : response.statusText, headers: newHeaders };
     let newResponse = new Response(response.body, newInit);
     return newResponse;
