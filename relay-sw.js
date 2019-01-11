@@ -122,7 +122,7 @@ class JsDelivrPlugin {
 
       cache: request.cache,
 
-      // Because mode is "no-cors", the redirect mode must be default "follow" (i.e. can not be "manual").
+//      // Because mode is "no-cors", the redirect mode must be default "follow" (i.e. can not be "manual").
       redirect: request.redirect,
 
       integrity: request.integrity,
@@ -181,11 +181,12 @@ let precacheFileNames = theJsDelivrPlugin.prependList([
 //   }
 // );
 
-workbox.precaching.precache(precacheFileNames);
+//workbox.precaching.precache(precacheFileNames);
 
 workbox.routing.registerRoute(
   theJsDelivrPlugin.replacePatternGitHubPages,
-  workbox.strategies.cacheFirst({
+//  workbox.strategies.cacheFirst({
+  workbox.strategies.networkOnly({
     plugins: [
       theJsDelivrPlugin
     ]
