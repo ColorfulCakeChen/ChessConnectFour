@@ -56,7 +56,7 @@ class RouteFromGitHubPagesToJsDelivr {
       cache: request.cache,
 
       // Use default "follow" (i.e. can not be "manual") so that inside iframe can also be loaded automatically.
-      //redirect: request.redirect,
+      redirect: request.redirect,
 
       integrity: request.integrity,
     };
