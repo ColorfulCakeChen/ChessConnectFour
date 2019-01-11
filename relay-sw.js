@@ -98,9 +98,9 @@ class RouteFromGitHubPagesToJsDelivr {
    * The handler callback of Workbox's route.
    */
   async handlerCb({url, event, params}) {
-    let request = determineRequest(event.request);
+    let request = this.determineRequest(event.request);
     let response = await fetch(request);
-    response = determineResponse(response);
+    response = this.determineResponse(response);
     return response;
   }
 }
