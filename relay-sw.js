@@ -26,7 +26,7 @@ class RouteFromGitHubPagesToJsDelivr {
    * @param  {Request} request The original request.
    * @return {Request} If GitHub Pages, return jsdrlivr request. Otherwise, the original request.
    */
-  determineRequest(request) {
+  async determineRequest(request) {
     let newURL = request.url.replace(this.replacePatternGitHubPages, this.replaceContextJsdelivr);
     if (request.url == newURL)
       return request;  // If no replacement, no need to redirect.
@@ -98,7 +98,7 @@ class RouteFromGitHubPagesToJsDelivr {
    * The handler callback of Workbox's route.
    */
   async handlerCb({url, event, params}) {
-    let request = this.determineRequest(event.request);
+    let request = await this.determineRequest(event.request);
     let response = await fetch(request);
     response = this.determineResponse(response);
     return response;
