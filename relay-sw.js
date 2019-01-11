@@ -93,18 +93,18 @@ class JsDelivrPlugin {
    * Replace path of GitHub Pages to jsdrlivr.
    */
   async requestWillFetch({request}) {
-    const newURL = request.url.replace(this.replacePatternGitHubPages, this.replaceContextJsdelivr);
+    let newURL = request.url.replace(this.replacePatternGitHubPages, this.replaceContextJsdelivr);
     if (request.url == newURL)
       return request;  // If no replacement, no need to redirect.
 
     // The following redirect method codes copied from:
     // https://stackoverflow.com/questions/34640286/how-do-i-copy-a-request-object-with-a-different-url/34641566#34641566
 
-    const body = await ( request.headers.get('Content-Type') ? request.blob() : Promise.resolve(undefined) );
-    const newRequest = new Request(newURL, {
+    let body = await ( request.headers.get('Content-Type') ? request.blob() : Promise.resolve(undefined) );
+    let newInit = {
       method: request.method,
       headers: request.headers,
-//      body: body,
+      body: body,
       referrer: request.referrer,
       referrerPolicy: request.referrerPolicy,
       mode: request.mode,
@@ -112,7 +112,8 @@ class JsDelivrPlugin {
       cache: request.cache,
       redirect: request.redirect,
       integrity: request.integrity,
-    });
+    };
+    let newRequest = new Request(newURL, newInit);
 
     return newRequest;  // Redirect to different URL.
   }
