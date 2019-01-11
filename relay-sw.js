@@ -185,8 +185,8 @@ let precacheFileNames = theJsDelivrPlugin.prependList([
 
 workbox.routing.registerRoute(
   theJsDelivrPlugin.replacePatternGitHubPages,
-//  workbox.strategies.cacheFirst({
-  workbox.strategies.networkOnly({
+  workbox.strategies.cacheFirst({
+//  workbox.strategies.networkOnly({
     plugins: [
       theJsDelivrPlugin
     ]
