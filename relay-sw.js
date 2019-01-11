@@ -98,13 +98,16 @@ class JsDelivrPlugin {
     if (request.url == newURL)
       return request;  // If no replacement, no need to redirect.
 
+    let newHeaders = new Headers(request.headers);
+    newHeaders.delete("upgrade-insecure-requests"); // Can not have this header when request.mode is "cors".
+
     // If the request has content type, it might have body. See also:
     // https://stackoverflow.com/questions/34640286/how-do-i-copy-a-request-object-with-a-different-url/34641566#34641566
     let body = await ( request.headers.get('Content-Type') ? request.blob() : Promise.resolve(undefined) );
 
     let newInit = {
       method: request.method,
-      headers: request.headers,
+      headers: newHeaders,
       body: body,
       referrer: request.referrer,
       referrerPolicy: request.referrerPolicy,
