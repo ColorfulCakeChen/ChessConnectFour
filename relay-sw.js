@@ -19,7 +19,7 @@ class RouteFromGitHubPagesToJsDelivr {
     this.replacePatternGitHubPages = /^https:\/\/([^.]+)\.github\.io\/([^/]+)/; // e.g. https://colorfulcakechen.github.io/ChessConnectFour
     this.replaceContextJsdelivr = "https://cdn.jsdelivr.net/gh/$1/$2";          // e.g. https://cdn.jsdelivr.net/gh/ColorfulCakeChen/ChessConnectFour
     if (this.version)
-       this.replaceContextJsdelivr += "@" + this.version;                       // e.g. https://cdn.jsdelivr.net/gh/ColorfulCakeChen/ChessConnectFour@0.16
+      this.replaceContextJsdelivr += "@" + this.version;                        // e.g. https://cdn.jsdelivr.net/gh/ColorfulCakeChen/ChessConnectFour@0.16
   }
 
   /**
@@ -76,7 +76,7 @@ class RouteFromGitHubPagesToJsDelivr {
  
     let contentTypeOld = response.headers.get("Content-Type");
     if (!contentTypeOld.match("text/plain"))
-       return response;  // Already correct MIME type, no need to convert.
+      return response;  // Already correct MIME type, no need to convert.
 
     let contentTypeNew = contentTypeOld.replace("text/plain", "text/html");
     let newHeaders = new Headers(response.headers);
@@ -88,9 +88,10 @@ class RouteFromGitHubPagesToJsDelivr {
 
   /**
    * The matching callback of Workbox's route.
+   * @param {URL} context.url
    */
   matchCb({url, event}) {
-    return (url.match(this.replacePatternGitHubPages));
+    return (url.href.match(this.replacePatternGitHubPages));
   }
 
   /**
