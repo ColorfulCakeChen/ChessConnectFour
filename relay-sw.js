@@ -113,7 +113,7 @@ class JsDelivrPlugin {
       redirect: request.redirect,
       integrity: request.integrity,
     };
-    let newRequest = new Request(newURL, newInit);
+    let newRequest = new Request(newURL); //, newInit);
 
     return newRequest;  // Redirect to different URL.
   }
