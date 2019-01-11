@@ -98,16 +98,18 @@ class JsDelivrPlugin {
     if (request.url == newURL)
       return request;  // If no replacement, no need to redirect.
 
-    // The following redirect method codes copied from:
+    // If the request has content type, it might have body. See also:
     // https://stackoverflow.com/questions/34640286/how-do-i-copy-a-request-object-with-a-different-url/34641566#34641566
-
     let body = await ( request.headers.get('Content-Type') ? request.blob() : Promise.resolve(undefined) );
+
     let newInit = {
       method: request.method,
       headers: request.headers,
       body: body,
       referrer: request.referrer,
       referrerPolicy: request.referrerPolicy,
+
+      // It is cross-origin to accessing jsdelivr from GitHub Page. (i.e. can not be "navigation".)
       //mode: request.mode,
       mode: "no-cors",
 
@@ -116,7 +118,10 @@ class JsDelivrPlugin {
       //credentials: request.credentials,
 
       cache: request.cache,
-      redirect: request.redirect,
+
+      // Because mode is "no-cors", the redirect mode must be default "follow" (i.e. can not be "manual").
+      //redirect: request.redirect,
+
       integrity: request.integrity,
     };
     let newRequest = new Request(newURL, newInit);
