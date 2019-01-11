@@ -109,6 +109,7 @@ class JsDelivrPlugin {
       referrer: request.referrer,
       referrerPolicy: request.referrerPolicy,
       //mode: request.mode,
+      mode: "no-cors",
 
       // Because we will direct to different origin, use default "same-origin.
       // If use request.credentials and it is "include", the new request will fail.
