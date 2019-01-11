@@ -56,7 +56,7 @@ class RouteFromGitHubPagesToJsDelivr {
       cache: request.cache,
 
 //      // Because mode is "no-cors", the redirect mode must be default "follow" (i.e. can not be "manual").
-      redirect: request.redirect,
+//      redirect: request.redirect,
 
       integrity: request.integrity,
     };
