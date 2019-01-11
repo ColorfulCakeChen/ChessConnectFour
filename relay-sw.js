@@ -6,7 +6,7 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
-const sourceVersion = "0.16";
+const sourceVersion = "0.17";
 
 /**
  * 
@@ -102,18 +102,17 @@ class JsDelivrPlugin {
 
     const body = await ( request.headers.get('Content-Type') ? request.blob() : Promise.resolve(undefined) );
     const newRequest = new Request(newURL, {
-        method: request.method,
-        headers: request.headers,
-        body: body,
-        referrer: request.referrer,
-        referrerPolicy: request.referrerPolicy,
-        mode: request.mode,
-        credentials: request.credentials,
-        cache: request.cache,
-        redirect: request.redirect,
-        integrity: request.integrity,
-      })
-    );
+      method: request.method,
+      headers: request.headers,
+      body: body,
+      referrer: request.referrer,
+      referrerPolicy: request.referrerPolicy,
+      mode: request.mode,
+      credentials: request.credentials,
+      cache: request.cache,
+      redirect: request.redirect,
+      integrity: request.integrity,
+    });
 
     return newRequest;  // Redirect to different URL.
   }
@@ -130,7 +129,7 @@ class JsDelivrPlugin {
 const theJsDelivrPlugin = new JsDelivrPlugin(
   "https://colorfulcakechen.github.io/ChessConnectFour",
   "https://cdn.jsdelivr.net/gh/ColorfulCakeChen/ChessConnectFour",
-  "0.16"
+  sourceVersion
 );
 
 /**
