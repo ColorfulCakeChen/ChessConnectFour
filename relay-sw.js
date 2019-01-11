@@ -55,8 +55,8 @@ class RouteFromGitHubPagesToJsDelivr {
 
       cache: request.cache,
 
-//      // Because mode is "no-cors", the redirect mode must be default "follow" (i.e. can not be "manual").
-//      redirect: request.redirect,
+      // Use default "follow" (i.e. can not be "manual") so that inside iframe can also be loaded automatically.
+      //redirect: request.redirect,
 
       integrity: request.integrity,
     };
