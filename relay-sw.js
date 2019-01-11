@@ -111,7 +111,7 @@ class JsDelivrPlugin {
 
       // It is cross-origin to accessing jsdelivr from GitHub Page. (i.e. can not be "navigation".)
       //mode: request.mode,
-      mode: "no-cors",
+      mode: "cors",
 
       // Because we will direct to different origin, use default "same-origin.
       // If use request.credentials and it is "include", the new request will fail.
@@ -120,7 +120,7 @@ class JsDelivrPlugin {
       cache: request.cache,
 
       // Because mode is "no-cors", the redirect mode must be default "follow" (i.e. can not be "manual").
-      //redirect: request.redirect,
+      redirect: request.redirect,
 
       integrity: request.integrity,
     };
