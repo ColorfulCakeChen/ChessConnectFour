@@ -104,7 +104,7 @@ class JsDelivrPlugin {
     const newRequest = new Request(newURL, {
       method: request.method,
       headers: request.headers,
-      body: body,
+//      body: body,
       referrer: request.referrer,
       referrerPolicy: request.referrerPolicy,
       mode: request.mode,
