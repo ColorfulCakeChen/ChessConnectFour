@@ -56,12 +56,24 @@ class JsDelivrPlugin {
     return pathFileName.replace(this.replacePatternGitHubPages, this.replaceContextJsdelivr);
   }
 
+
   /**
    * Convert MIME type of .html file from text/plain to text/html.
    */
   async cacheWillUpdate({request, response, event}) {
-    // Return `response`, a different Response object or null
-    return response;
+    let matchResult = request.url.match(/.html$/i);
+    if (!matchResult)
+      return response;   // Not .html file, no need to convert.
+ 
+    let contentTypeOld = response.headers.get("Content-Type");
+    if (contentTypeOld == "text/html")
+       return response;  // Already correct MIME type, no need to convert.
+
+    let newHeaders = new Headers(response.headers);
+    newHeaders.set("Content-Type", "text/html");
+    let newInit = { status : response.status, statusText : response.statusText, headers: newHeaders };
+    let newResponse = new Response(response.body, newInit);
+    return newResponse;
   }
 
 //   async cacheDidUpdate({cacheName, request, oldResponse, newResponse, event}) {
@@ -141,7 +153,7 @@ function urlManipulator({url}) {
 // //  googleAnalytics:
 // });
 
-let precacheFileNames = sourceMeta.prependList([
+let precacheFileNames = theJsDelivrPlugin.prependList([
   "/index.html",
   "/relay-sw.js",  // !!
   "/_config.yml",
@@ -158,7 +170,7 @@ let precacheFileNames = sourceMeta.prependList([
 workbox.precaching.precache(precacheFileNames);
 
 workbox.routing.registerRoute(
-  sourceMeta.replacePatternGitHubPages,
+  theJsDelivrPlugin.replacePatternGitHubPages,
   workbox.strategies.cacheFirst({
     plugins: [
       theJsDelivrPlugin
