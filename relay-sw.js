@@ -33,7 +33,8 @@ class RouteFromGitHubPagesToJsDelivr {
 
     let newHeaders = new Headers(request.headers);
     newHeaders.delete("upgrade-insecure-requests"); // Can not have this header when request.mode is "cors".
-    newHeaders.delete("only-if-cached");            // Can not have this header when request.mode is "cors". (can only in "same-origin")
+//!!! This is under header Cache-Control
+//    newHeaders.delete("only-if-cached");            // Can not have this header when request.mode is "cors". (can only in "same-origin")
 
     // If the request has content type, it might have body. See also:
     // https://stackoverflow.com/questions/34640286/how-do-i-copy-a-request-object-with-a-different-url/34641566#34641566
