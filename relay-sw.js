@@ -109,12 +109,14 @@ class JsDelivrPlugin {
       referrer: request.referrer,
       referrerPolicy: request.referrerPolicy,
       mode: request.mode,
-      credentials: request.credentials,
+      // Because we will direct to different origin, use default "same-origin.
+      // If use request.credentials and it is "include", the new request will fail.
+      //credentials: request.credentials,
       cache: request.cache,
       redirect: request.redirect,
       integrity: request.integrity,
     };
-    let newRequest = new Request(newURL); //, newInit);
+    let newRequest = new Request(newURL, newInit);
 
     return newRequest;  // Redirect to different URL.
   }
