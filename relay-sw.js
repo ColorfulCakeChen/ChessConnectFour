@@ -6,7 +6,7 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
-const sourceVersion = "0.18";
+const sourceVersion = "0.19";
 
 /**
  * Route GuiHub Pages to jsdelivr (with a specific version tag).
