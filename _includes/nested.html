@@ -2,8 +2,19 @@
 <html>
   <head>
     <title>Chess Connect Four (Nested)</title>
+    <script>
+    // Check that service workers are registered
+    if ('serviceWorker' in navigator) {
+      // Use the window load event to keep the page load performant
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('nested-relay-sw.js');
+      });
+    }
+    </script>
   </head>
   <body>
     <h1>This is a nested file.</h1>
+    <img src="../project-management.png"></img>
+    <iframe src="indexInReleaseAsset.html"></iframe>
   </body>
 </html>
